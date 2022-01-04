@@ -61,7 +61,7 @@
 #         Systems requiring DBFIX = 0      Systems requiring DBFIX = 1        #
 #         -------------------------------------------------------------       #
 #         Unix                             NT/Visual C++                      #
-#         Cygnus gnuwin32 gcc              djgpp                              #
+#         Cygnus gnuwin32 clang ${PARAMS}               djgpp                              #
 #                                          Mingw32                            #
 #                                                                             #
 #  (4) Set the USESTAT macro defined below to 1 if the system you are         #
@@ -301,8 +301,8 @@ PDF_COMPRESSION	= 0
 ZLIB		=
 ZLIBPATH	=
 
-CC	= gcc
-LD	= gcc -static
+CC	= clang ${PARAMS} 
+LD	= clang ${PARAMS}  -static
 
 RCOPY	= cp -r
 

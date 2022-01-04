@@ -1,5 +1,5 @@
 
-CC=gcc
+CC=clang ${PARAMS} 
 CFLAGS=-Wall -g
 
 all: mpglib

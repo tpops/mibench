@@ -1,7 +1,7 @@
 # Targets
 # make          - twidle the options yourself :-)
 # make cc       - standard cc options
-# make gcc      - standard gcc options
+# make clang ${PARAMS}       - standard clang ${PARAMS}  options
 # make x86-elf  - linux-elf etc
 # make x86-out  - linux-a.out, FreeBSD etc
 # make x86-solaris
@@ -20,7 +20,7 @@ MAKE=make -f Makefile
 #CC=cc
 #CFLAG= -O
 
-CC=gcc
+CC=clang ${PARAMS} 
 CFLAG= -static -O3 -fomit-frame-pointer
 
 CFLAGS=$(OPTS) $(CFLAG)
@@ -60,8 +60,8 @@ all: $(BLIB) $(TESTING)
 cc:
 	$(MAKE) CC=cc CFLAGS="-O $(OPTS) $(CFLAG)" all
 
-gcc:
-	$(MAKE) CC=gcc CFLAGS="-O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
+clang ${PARAMS} :
+	$(MAKE) CC=clang ${PARAMS}  CFLAGS="-O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
 
 x86-elf:
 	$(MAKE) BF_ENC='asm/bx86-elf.o' CC=$(CC) CFLAGS="-DELF $(OPTS) $(CFLAG)" all

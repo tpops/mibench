@@ -156,6 +156,8 @@ while (my $line = <STDIN>) {
                 $call_graph{$source} = {};
                 $a=~ s/^0*//; #remove trailing 0s
                 $addresses{"$a\@$file"} = $source; 
+	        $ambiguous{$func} = 1 if defined($global_name{$func});
+	        $global_name{$func} = "$func\@$file";
 	}
 	elsif ($line =~ m/(.*):\s*file format/) {
 		$file = $1;

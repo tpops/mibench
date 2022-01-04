@@ -28,7 +28,7 @@ top_srcdir =	..
 PACKAGE =	mad
 VERSION =	0.14.2b
 
-CC =		gcc
+CC =		clang ${PARAMS} 
 
 DEBUG =		-Wall -O2 #-g
 CFLAGS =	$(DEBUG) -m486

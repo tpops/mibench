@@ -77,18 +77,18 @@ default:
 	@echo "        make <system>"
 	@echo ""
 	@echo "where <system> can be:"
-	@echo "	386bsd, 3b1, 3b1_asm, aix370, aix386, amix-68k-gcc, apollo,"
-	@echo "	apollo-gcc, atari,aux(*), aux-gcc, bsd, bsdgcc, convexos,"
+	@echo "	386bsd, 3b1, 3b1_asm, aix370, aix386, amix-68k-clang ${PARAMS} , apollo,"
+	@echo "	apollo-clang ${PARAMS} , atari,aux(*), aux-clang ${PARAMS} , bsd, bsdclang ${PARAMS} , convexos,"
 	@echo "	dgux, djgpp, encore, freebsd, hpux-68k(*), hpux-68k-ansi,"
-	@echo "	hpux-68k-gcc, hpux-pa(*), hpux-pa-ansi, hpux-pa-gcc,"
+	@echo "	hpux-68k-clang ${PARAMS} , hpux-pa(*), hpux-pa-ansi, hpux-pa-clang ${PARAMS} ,"
 	@echo "	hpux9-pa-ansi, irix, irix_asm, isc, isc_asm, linux, linux-68k,"
 	@echo "	machten, mach_386, mips-ultrix, netbsd, netbsd_68k, newsasm,"
-	@echo "	newsgcc, next, next-intel, next486, nextHP, os2, osf, qnx4,"
-	@echo "	riscos501, rs6000, rt_aos4, sco-2.0, sco-3.0, sco-3.0-gcc,"
-	@echo "	sco386cc, sgigcc, sgigcc_asm, sinix, solx86gcc, sun386i,"
-	@echo "	sun3asm, sun3cc(*), sun3gcc, sun4cc(*), sun4gcc,"
-	@echo "	sun4sunos5gcc, sun4acc, sun4sunos5acc, sunspc, sysv, sysvgcc,"
-	@echo "	sysv_386, sysv_386_gcc, unixware, vax-ultrix, vax_bsd43,"
+	@echo "	newsclang ${PARAMS} , next, next-intel, next486, nextHP, os2, osf, qnx4,"
+	@echo "	riscos501, rs6000, rt_aos4, sco-2.0, sco-3.0, sco-3.0-clang ${PARAMS} ,"
+	@echo "	sco386cc, sgiclang ${PARAMS} , sgiclang ${PARAMS} _asm, sinix, solx86clang ${PARAMS} , sun386i,"
+	@echo "	sun3asm, sun3cc(*), sun3clang ${PARAMS} , sun4cc(*), sun4clang ${PARAMS} ,"
+	@echo "	sun4sunos5clang ${PARAMS} , sun4acc, sun4sunos5acc, sunspc, sysv, sysvclang ${PARAMS} ,"
+	@echo "	sysv_386, sysv_386_clang ${PARAMS} , unixware, vax-ultrix, vax_bsd43,"
 	@echo "	xenix286(*), xenix386"
 	@echo ""
 	@echo "For targets marked with (*) you must first get unproto."
@@ -152,27 +152,27 @@ $(PROJ):	$(OBJS)
 		$(LD) -o $(PROJ) $(OBJS) $(LDFLAGS) $(LIBS_EXT) $(RSALIBS)
 
 #  Commodore Amiga Running SVR4 2.1p2a with GCC 2.6.0 LER
-amix-68k-gcc:
-	$(MAKE) all CC=gcc LD=gcc \
+amix-68k-clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O2 -DHIGHFIRST -DUNIX \
 	-DPORTABLE -DIDEA32"
 
-# Atari-version with gcc 2.5.8
+# Atari-version with clang ${PARAMS}  2.5.8
 atari:
-	$(MAKE) all CC=gcc LD=gcc PROJ=pgp.ttp \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  PROJ=pgp.ttp \
 	CFLAGS="$(RSAINCDIR) $(USEMPILIB) -O2 -DATARI -DHIGHFIRST -DPORTABLE \
 	-DUNIT32 -DIDEA32"
 
 linux:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="_80386.o _zmatch.o" \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="_80386.o _zmatch.o" \
 	CFLAGS="$(RSAINCDIR) -O6 -g3 -DUNIX -DLINUX -DIDEA32 -DASM"
 
 arm-linux:
-	$(MAKE) all CC=arm-linux-gcc LD=arm-linux-gcc OBJS_EXT="" \
+	$(MAKE) all CC=arm-linux-clang ${PARAMS}  LD=arm-linux-clang ${PARAMS}  OBJS_EXT="" \
 	CFLAGS="$(RSAINCDIR) -O2 -g0 -DUNIX -DLINUX -DIDEA32 -DPORTABLE"
 
 linux-68k:
-	$(MAKE) all CC=gcc LD=gcc \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O2 -DHIGHFIRST -DUNIX -DPORTABLE -DIDEA32"
 
 freebsd:
@@ -181,26 +181,26 @@ freebsd:
 	-DMAX_NAMELEN=255"
 
 386bsd:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="_80386.o _zmatch.o" \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="_80386.o _zmatch.o" \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DIDEA32 -DASM -DMAX_NAMELEN=255"
 
 netbsd:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="_80386.o _zmatch.o" \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="_80386.o _zmatch.o" \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DIDEA32 -DASM -DMAX_NAMELEN=255"
 
 netbsd_68k:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="mc68020.o" \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="mc68020.o" \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DHIGHFIRST -DIDEA32 -DMAX_NAMELEN=255"
 
-# Sun 3 with gcc
-# change -traditional-cpp to -traditional for gcc < 2.0
-sun3gcc:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT=memmove.o \
+# Sun 3 with clang ${PARAMS} 
+# change -traditional-cpp to -traditional for clang ${PARAMS}  < 2.0
+sun3clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT=memmove.o \
 	CFLAGS="$(RSAINCDIR) -O -traditional-cpp -DUNIX -DHIGHFIRST \
 	-DIDEA32 -DPORTABLE"
 
 sun3asm:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="mc68020.o memmove.o" \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="mc68020.o memmove.o" \
 	CFLAGS="$(RSAINCDIR) -O -traditional-cpp -DUNIX -DHIGHFIRST -DIDEA32"
 
 # Sun 3 with standard cc: compile with unproto
@@ -209,11 +209,11 @@ sun3cc: unproto/cpp
 	CFLAGS="$(RSAINCDIR) -Qpath unproto -O -DUNIX -DHIGHFIRST \
 	-DIDEA32 -DPORTABLE"
 
-# Sun 4 SPARC with gcc (tested with gcc 1.39 and newer, sparc.s can not be
-# used with older versions of gcc)
-# change -traditional-cpp to -traditional for gcc < 2.0
-sun4gcc:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="sparc.o memmove.o" \
+# Sun 4 SPARC with clang ${PARAMS}  (tested with clang ${PARAMS}  1.39 and newer, sparc.s can not be
+# used with older versions of clang ${PARAMS} )
+# change -traditional-cpp to -traditional for clang ${PARAMS}  < 2.0
+sun4clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="sparc.o memmove.o" \
 	CFLAGS="$(RSAINCDIR) -O -traditional-cpp -DUNIX -DHIGHFIRST -DIDEA32"
 
 # Sun 4 SPARC with standard cc: compile with unproto
@@ -227,9 +227,9 @@ sun4acc:
 	$(MAKE) all CC=acc LD=acc CPP="cc -E" OBJS_EXT="sparc.o memmove.o" \
 	CFLAGS="-w $(RSAINCDIR) -xO4 -DUNIX -DHIGHFIRST -DIDEA32" \
  
-# Sun 4 running Sunos5 (Solaris) using gcc
-sun4sunos5gcc:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT=sparc.o \
+# Sun 4 running Sunos5 (Solaris) using clang ${PARAMS} 
+sun4sunos5clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT=sparc.o \
 	CFLAGS="$(RSAINCDIR) -O -traditional-cpp -DSOLARIS -DUNIX -DHIGHFIRST \
 	-DIDEA32" ASMDEF=-DSYSV
 
@@ -240,7 +240,7 @@ sun4sunos5acc:
 	-DPORTABLE"
 
 sun386i:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="_80386.o memmove.o" \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="_80386.o memmove.o" \
 	CFLAGS="$(RSAINCDIR) -I. -O -DUNIX -DIDEA32 -DNOTERMIO" \
 	ASMDEF=-DSYSV
 
@@ -250,21 +250,21 @@ sunspc:
 	-DMERRITT" OBJS_EXT=sparc.o
 
 # x86 running SunOS 5 (Solaris)...
-solx86gcc:
-	$(MAKE) all CC=gcc LD=gcc \
+solx86clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -traditional-cpp -DSOLARIS -DUNIX -DIDEA32 \
         -DPORTABLE"
 
-# Sony newsos v3 for m68k, with gcc
-# change -traditional-cpp to -traditional for gcc < 2.0
-newsgcc:
-	$(MAKE) all CC=gcc LD=gcc \
+# Sony newsos v3 for m68k, with clang ${PARAMS} 
+# change -traditional-cpp to -traditional for clang ${PARAMS}  < 2.0
+newsclang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -I. -traditional-cpp -DNOTERMIO -D_BSD \
 	-DUNIX -DHIGHFIRST -DIDEA32 -DPORTABLE"
 
 #  with asm
 newsasm:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT=mc68020.s CFLAGS="$(RSAINCDIR) -O \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT=mc68020.s CFLAGS="$(RSAINCDIR) -O \
 	-I. -traditional-cpp -DNOTERMIO -D_BSD -DUNIX -DHIGHFIRST -DIDEA32"
 
 qnx4:
@@ -273,15 +273,15 @@ qnx4:
 	-DPORTABLE -DMPORTABLE $(BYTEORDER) -DMAX_NAMELEN=255"
 
 encore:
-	$(MAKE) all CC=gcc LD=gcc CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE \
 	-DMPORTABLE -DUSE_NBIO -DIDEA32 -DUPTON -DHIGHFIRST"
 
 sysv:
 	$(MAKE) all CPP=/lib/cpp \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE -DUSE_NBIO $(BYTEORDER)"
 
-sysvgcc:
-	$(MAKE) all CC=gcc LD=gcc CPP=/lib/cpp \
+sysvclang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/lib/cpp \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE -DUSE_NBIO $(BYTEORDER)"
 
 # Optimized version with 80386.S
@@ -289,34 +289,34 @@ sysv_386:
 	$(MAKE) all CPP="/lib/cpp -DSYSV" OBJS_EXT="_80386.o _zmatch.o" \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DIDEA32 -DUSE_NBIO -DASM"
 
-# gcc tested on ESIX 4.0.3a with gcc 2.5.8
-sysv_386_gcc:
-	$(MAKE) all CC=gcc LD=gcc CPP="/lib/cpp -DSYSV" \
+# clang ${PARAMS}  tested on ESIX 4.0.3a with clang ${PARAMS}  2.5.8
+sysv_386_clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP="/lib/cpp -DSYSV" \
 	OBJS_EXT="_80386.o _zmatch.o" \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DIDEA32 -DUSE_NBIO -DASM"
 
-# Interactive Unix SVR3/386 version 3.2 with gcc
+# Interactive Unix SVR3/386 version 3.2 with clang ${PARAMS} 
 isc:
-	$(MAKE) all CC=gcc LD=gcc LDFLAGS="-lcposix -lrpc" OBJS_EXT=memmove.o \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  LDFLAGS="-lcposix -lrpc" OBJS_EXT=memmove.o \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DIDEA32 -DUSE_NBIO -DPORTABLE \
 	-DNO_ITIMER"
 
 isc_asm:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="_80386.o memmove.o" ASMDEF=-DSYSV \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="_80386.o memmove.o" ASMDEF=-DSYSV \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DIDEA32 -DUSE_NBIO -DNO_ITIMER" \
 	LDFLAGS="-lcposix -lrpc"
 
 mach_386:
-	$(MAKE) all CC=gcc LD=gcc CPP=/lib/cpp OBJS_EXT=_80386.o \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/lib/cpp OBJS_EXT=_80386.o \
 	CFLAGS="$(RSAINCDIR) -O -I. -DMACH -DUNIX -DIDEA32 -DNOTERMIO"
 
 machten:
-	$(MAKE) all CC=gcc LD=gcc CPP=/lib/cpp OBJS_EXT=mc68020.o \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/lib/cpp OBJS_EXT=mc68020.o \
 	CFLAGS="$(RSAINCDIR) -O -I. -DMACH -DUNIX -DHIGHFIRST \
 	-DIDEA32 -DNOTERMIO"
 
 sco-2.0:
-	$(MAKE) all CC=gcc LD=gcc CPP=/usr/lib/xcpp OBJS_EXT=_80386.o \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/usr/lib/xcpp OBJS_EXT=_80386.o \
 	ASMDEF=-DSYSV CFLAGS="$(RSAINCDIR) -Dsco -O -DUNIX -DIDEA32 -DUSE_NBIO"
 
 sco-3.0:
@@ -324,8 +324,8 @@ sco-3.0:
 	ASMDEF=-DSYSV CFLAGS="$(RSAINCDIR) -Dsco -O -DUNIX -DIDEA32 \
 	-DUSE_NBIO" LDFLAGS="-lsocket"
 
-sco-3.0-gcc:
-	$(MAKE) all CC=gcc LD=gcc CPP=/usr/lib/xcpp OBJS_EXT=_80386.o \
+sco-3.0-clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/usr/lib/xcpp OBJS_EXT=_80386.o \
 	ASMDEF=-DSYSV CFLAGS="-traditional-cpp $(RSAINCDIR) -Dsco -O \
 	-DUNIX -DIDEA32 -DUSE_NBIO" LIBS_EXT=-lsocket
 
@@ -339,9 +339,9 @@ sinix:
 	$(MAKE) all CPP=/lib/cpp \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE -DUSE_NBIO -DHIGHFIRST"
 
-# Data General Unix using gcc
+# Data General Unix using clang ${PARAMS} 
 dgux:
-	$(MAKE) all CPP=/lib/cpp CC=gcc LD=gcc\
+	$(MAKE) all CPP=/lib/cpp CC=clang ${PARAMS}  LD=clang ${PARAMS} \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE -DUSE_NBIO  \
 	-DIDEA32 -DHIGHFIRST"
 
@@ -357,23 +357,23 @@ xenix386:
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DSVR2 -DIDEA32 -DUSE_NBIO -DASM"
 
 3b1:
-	$(MAKE) all CC=gcc LD=gcc CPP=/usr/lib/cpp \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/usr/lib/cpp \
 	CFLAGS="$(RSAINCDIR) -O -I. -DUNIX -DSVR2 -DPORTABLE -DUSE_NBIO \
 	-DHIGHFIRST -DMAX_NAMELEN=14"
 
 3b1_asm:
-	$(MAKE) all CC=gcc LD=gcc CPP=/usr/lib/cpp OBJS_EXT=3b168010.o \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/usr/lib/cpp OBJS_EXT=3b168010.o \
 	CFLAGS="$(RSAINCDIR) -O -I. -DUNIX -DSVR2 -DUSE_NBIO -DHIGHFIRST \
 	-DMAX_NAMELEN=14"
 
 # Silicon Graphics Iris IRIX
-sgigcc:
-	$(MAKE) all CC=gcc LD=gcc CPP=/usr/lib/cpp \
+sgiclang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/usr/lib/cpp \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE -DUSE_NBIO -DHIGHFIRST"
 
 # SGI with assembler modules
-sgigcc_asm:
-	$(MAKE) all CC=gcc LD=gcc CPP=/usr/lib/cpp OBJS_EXT="r3000.o r3kd.o" \
+sgiclang ${PARAMS} _asm:
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  CPP=/usr/lib/cpp OBJS_EXT="r3000.o r3kd.o" \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DUSE_NBIO -DHIGHFIRST"
 
 irix:
@@ -401,9 +401,9 @@ hpux9-pa-ansi:
 	-DUNIX -DPORTABLE -DUSE_SELECT -DIDEA32 -DMERRITT"
 
 
-# HP series 700 pa-risc running HP/UX with gcc
-hpux-pa-gcc:
-	$(MAKE) all CC=gcc LD=gcc \
+# HP series 700 pa-risc running HP/UX with clang ${PARAMS} 
+hpux-pa-clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O2 -D_HPUX_SOURCE -DHIGHFIRST -DUNIX \
 	-DPORTABLE -DUSE_SELECT -DIDEA32 -DMERRITT"
 
@@ -419,9 +419,9 @@ hpux-68k-ansi:
 	CFLAGS="$(RSAINCDIR) -Aa +O2 -D_HPUX_SOURCE -DHIGHFIRST -DUNIX \
 	-DPORTABLE -DUSE_SELECT -DIDEA32"
 
-# HP series 300 mc68k running HP/UX with gcc
-hpux-68k-gcc:
-	$(MAKE) all CC=gcc LD=gcc \
+# HP series 300 mc68k running HP/UX with clang ${PARAMS} 
+hpux-68k-clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O2 -D_HPUX_SOURCE -DHIGHFIRST -DUNIX \
 	-DPORTABLE -DUSE_SELECT -DIDEA32"
 
@@ -431,13 +431,13 @@ hpux-68k: unproto/cpp
 	CFLAGS="-tp,./unproto/cpp $(RSAINCDIR) -DHIGHFIRST \
 	-DUNIX -DPORTABLE -DUSE_SELECT -DIDEA32"
 
-# VAX Ultrix 4.2 BSD rev. 96, system #3 with gcc
+# VAX Ultrix 4.2 BSD rev. 96, system #3 with clang ${PARAMS} 
 vax-ultrix:
-	$(MAKE) all CC=gcc LD=gcc \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -DPORTABLE -DUSE_SELECT \
 	-DSIG_IGN=1 -DSIG_DFL=0"
 
-# DEC Ultrix 4.2 BSD with gcc with MIPSco processors
+# DEC Ultrix 4.2 BSD with clang ${PARAMS}  with MIPSco processors
 #
 # To use dec's cc on mips you should
 # uncomment the next two lines because you can't compile r3000.c 
@@ -445,11 +445,11 @@ vax-ultrix:
 #	$(AS) -o $@ r3000.s
 #
 #mips-ultrix:
-#	$(MAKE) all CC=gcc LD=gcc OBJS_EXT="r3kd.o r3000.o"\
+#	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT="r3kd.o r3000.o"\
 #	CFLAGS="$(RSAINCDIR) $(DBG) -DUNIX -DUSE_SELECT -DIDEA32"
 
 mips-ultrix:
-	$(MAKE) all CC=gcc LD=gcc \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) $(DBG) -DUNIX -DPORTABLE \
 	-DMPORTABLE -DUSE_SELECT -DIDEA32"
 
@@ -460,7 +460,7 @@ riscos501:
 	-DMPORTABLE -DUSE_SELECT -DMERRITT"
 
 convexos:
-	$(MAKE) all CC=gcc LD=gcc \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -DHIGHFIRST -DUNIX \
 	-DPORTABLE -DIDEA32"
 
@@ -499,8 +499,8 @@ nextHP:
 	CFLAGS="$(RSAINCDIR) -O -arch hppa -DNEXT -DUNIX -DMACH -DPORTABLE \
 	-DNOTERMIO -DHIGHFIRST"
 
-bsdgcc:
-	$(MAKE) all CC=gcc LD=gcc \
+bsdclang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -I. -DNOTERMIO -D_BSD -DUNIX -DPORTABLE \
 	-DUSE_NBIO $(BYTEORDER)"
 
@@ -520,21 +520,21 @@ apollo:
 	CFLAGS="$(RSAINCDIR) -O -I. -DHIGHFIRST -DBSD -DUNIX -DPORTABLE \
 	-DUSE_SELECT"
 
-#  Apollo running DomainOS Release 10.4 (bsd4.3) and gcc 2.6.0
-apollo-gcc:
-	$(MAKE) all CC=gcc LD=gcc \
+#  Apollo running DomainOS Release 10.4 (bsd4.3) and clang ${PARAMS}  2.6.0
+apollo-clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -I. -DHIGHFIRST -DBSD -DUNIX -DPORTABLE \
 	-DUSE_SELECT"
 
-# RT running bsd with gcc
+# RT running bsd with clang ${PARAMS} 
 rt_aos4:
-	$(MAKE) all CC=gcc LD=gcc \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -DUNIX -D_BSD -DMAX_NAMELEN=255 -DPORTABLE \
 	-DHIGHFIRST -DNOTERMIO -I."
 
-# Vax running bsd with gcc
+# Vax running bsd with clang ${PARAMS} 
 vax_bsd43:
-	$(MAKE) all CC=gcc LD=gcc \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  \
 	CFLAGS="$(RSAINCDIR) -O -I. -DUNIX -D_BSD -DMAX_NAMELEN=255 \
 	-DNOTERMIO -DPORTABLE"
 
@@ -551,31 +551,31 @@ aux: unproto/cpp
 	LDFLAGS="-lposix -lbsd" \
 	CFLAGS="$(RSAINCDIR) -B unproto/ -tp -DSVR2 \
 	-DHIGHFIRST -DUNIX -DPORTABLE -DUSE_SELECT -DUPTON"
-aux-gcc:
-	$(MAKE) all CC=gcc LD=gcc OBJS_EXT=memmove.o \
+aux-clang ${PARAMS} :
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  OBJS_EXT=memmove.o \
 	LDFLAGS="-lposix -lbsd" \
 	CFLAGS="$(RSAINCDIR) -O2 -DSVR2 -DHIGHFIRST -DUNIX -DPORTABLE \
 	-DUSE_SELECT -DUPTON"
 
-# Novell UnixWare 2.0 with gcc
+# Novell UnixWare 2.0 with clang ${PARAMS} 
 unixware:
-	$(MAKE) all CC=gcc LD=gcc LDFLAGS="" \
+	$(MAKE) all CC=clang ${PARAMS}  LD=clang ${PARAMS}  LDFLAGS="" \
 	CFLAGS="$(RSAINCDIR) -O2 -m486 -DUNIX -DIDEA32 -DUSE_NBIO -DPORTABLE"
 
 # Optimized version with 80386.S for OS/2 2.x.
-# Requires emx 0.8h (i.e. gcc 2.5.7 or later) and GNU make 3.71 for OS/2
+# Requires emx 0.8h (i.e. clang ${PARAMS}  2.5.7 or later) and GNU make 3.71 for OS/2
 os2:
 	$(MAKE) all PROJ=pgp.exe RM=del OBJS_EXT="_80386.o _zmatch.o" \
-	CC="gcc -Zomf" CFLAGS="$(RSAINCDIR) -O -DOS2 -DASM -DIDEA32" \
-	ASM="gcc -Zomf -c" LD="gcc -Zomf -Zsys" LDFLAGS="-s pgp.def"
+	CC="clang ${PARAMS}  -Zomf" CFLAGS="$(RSAINCDIR) -O -DOS2 -DASM -DIDEA32" \
+	ASM="clang ${PARAMS}  -Zomf -c" LD="clang ${PARAMS}  -Zomf -Zsys" LDFLAGS="-s pgp.def"
 
 
 # DJGPP, DJ Delorie's port of GNU C to MS-DOS (thanks DJ!).
 # (Tested with DJGPP 2.0 and GNU make.)
 djgpp:
 	$(MAKE) all 'OBJS_EXT=_80386.o _zmatch.o' \
-	CC=gcc 'CFLAGS=$(RSAINCDIR) -O3 -DASM -DIDEA32' \
-	LD=gcc LIBS_EXT=-lpc RM=del
+	CC=clang ${PARAMS}  'CFLAGS=$(RSAINCDIR) -O3 -DASM -DIDEA32' \
+	LD=clang ${PARAMS}  LIBS_EXT=-lpc RM=del
 	strip pgp
 	coff2exe pgp
 

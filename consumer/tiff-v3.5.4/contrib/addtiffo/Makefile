@@ -4,8 +4,8 @@
 #
 LIBTIFF_DIR =	../../libtiff
 #
-CC	=	gcc
-CXX	=	gcc
+CC	=	clang ${PARAMS} 
+CXX	=	clang ${PARAMS} 
 CFLAGS	=	-O -I$(LIBTIFF_DIR)
 LIBS	=	$(LIBTIFF_DIR)/libtiff.a -lm
 

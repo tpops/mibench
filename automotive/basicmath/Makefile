@@ -1,14 +1,14 @@
-FILE1 = basicmath_small.c   rad2deg.c  cubic.c   isqrt.c
+LE1 = basicmath_small.c   rad2deg.c  cubic.c   isqrt.c
 FILE2 = basicmath_large.c   rad2deg.c  cubic.c   isqrt.c
 
 all: basicmath_small basicmath_large
-CMDPARAMS= "default"
+PARAMS= ""
 action:
-	@echo $(CMDPARAMS)
+	@echo $(PARAMS)
 basicmath_small: ${FILE1} Makefile
-	/media/tobipopoola/MyPassport/research/mediatek-collab/llvm-project/build/bin/clang ${CMDPARAMS}  ${FILE1} -o basicmath_small -lm
+	clang ${PARAMS}  ${FILE1} -o basicmath_small -lm
 basicmath_large: ${FILE2} Makefile
-	/media/tobipopoola/MyPassport/research/mediatek-collab/llvm-project/build/bin/clang ${CMDPARAMS} -static -O3 ${FILE2} -o basicmath_large -lm
+	clang ${PARAMS} -static -O3 ${FILE2} -o basicmath_large -lm
 
 clean:
 	rm -rf basicmath_small basicmath_large output*

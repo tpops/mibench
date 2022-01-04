@@ -27,6 +27,7 @@
 /* and conditionally define switches in gconfig_.h. */
 #include "gconfig_.h"
 
+#include <time.h>
 /* Some System V environments don't include sys/time.h. */
 /* The HAVE_SYS_TIME_H switch in gconfig_.h reflects this. */
 #ifdef HAVE_SYS_TIME_H

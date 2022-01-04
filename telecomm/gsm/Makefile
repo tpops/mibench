@@ -32,27 +32,27 @@ SASR	= -DSASR
 # CC		= /usr/lang/acc
 # CCFLAGS 	= -c -O
 
-CC		= gcc -ansi -pedantic -static
-# ARM gcc doesn't like the -O1 here...
+CC		= clang ${PARAMS}  -ansi -pedantic -static
+# ARM clang ${PARAMS}  doesn't like the -O1 here...
 #CCFLAGS 	= -c -O1 -DSTUPID_COMPILER -DNeedFunctionPrototypes=1
 CCFLAGS 	= -c -O3 -DSTUPID_COMPILER -DNeedFunctionPrototypes=1
 
 LD 		= $(CC)
 
-# LD		= gcc
+# LD		= clang ${PARAMS} 
 # LDFLAGS 	=
 
 
 # If your compiler needs additional flags/libraries, regardless of
 # the source compiled, configure them here.
 
-# CCINC	= -I/usr/gnu/lib/gcc-2.1/gcc-lib/sparc-sun-sunos4.1.2/2.1/include
+# CCINC	= -I/usr/gnu/lib/clang ${PARAMS} -2.1/clang ${PARAMS} -lib/sparc-sun-sunos4.1.2/2.1/include
 ######### Includes needed by $(CC)
 
-# LDINC	= -L/usr/gnu/lib/gcc-2.1/gcc-lib/sparc-sun-sunos4.1.2/2.1
+# LDINC	= -L/usr/gnu/lib/clang ${PARAMS} -2.1/clang ${PARAMS} -lib/sparc-sun-sunos4.1.2/2.1
 ######### Library paths needed by $(LD)
 
-# LDLIB	= -lgcc
+# LDLIB	= -lclang ${PARAMS} 
 ######### Additional libraries needed by $(LD)
 
 
