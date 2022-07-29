@@ -1,5 +1,5 @@
 patricia: patricia.c patricia_test.c
-	clang ${PARAMS}  -static patricia.c patricia_test.c -O3 -o patricia
+	clang ${PARAMS}  -static patricia.c patricia_test.c  -o patricia
 
 clean:
 	rm -rf patricia output*

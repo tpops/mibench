@@ -89,9 +89,9 @@ BUILDHASH	=	../../buildhash
 # If you change AFFIXES for english, you should consider also changing
 # DEFLANG (in config.X) to match.
 #
-MASTERDICTS	=	Use_LANGUAGES_from_config.X
-HASHFILES	=	Use_LANGUAGES_from_config.X
-EXTRADICT	=	Use_LANGUAGES_from_config.X
+#MASTERDICTS	=	Use_LANGUAGES_from_config.X
+#HASHFILES	=	Use_LANGUAGES_from_config.X
+#EXTRADICT	=	Use_LANGUAGES_from_config.X
 
 #
 # The following variables may be overridden by the superior Makefile,

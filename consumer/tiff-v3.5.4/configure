@@ -481,7 +481,7 @@ isGNU()
 # NB: use ANSI C prototype to weed out non-ANSI compilers.
 #
 cat>dummy.c<<EOF
-main(int argc, char* argv) { exit(0); }
+main(int argc, char** argv) { exit(0); }
 EOF
 
 checkCompiler()
@@ -523,7 +523,7 @@ CCtested=
 capture cat dummy.c
 if [ -z "${CC-}" ]; then
     CCOMPILER=
-    for i in gcc cc ncc dcc xlc c89 gcc2; do
+    for i in clang cc ncc dcc xlc c89 clang2; do
 	CCtested="$CCtested $i"
 	checkCompiler $i && break
     done
@@ -590,12 +590,13 @@ if [ -z "${GCOPTS-}" ]; then
     if capture $CCOMPILER $ENVOPTS -g -c dummy.c; then
 	Note "Looks like $CCOMPILER supports the -g option."
 	# NB: cannot use captureX here 'cuz we lose stderr
-	if $CCOMPILER $ENVOPTS -c -g -O dummy.c >t 2>&1 && CheckForGandO t; then
-	    GCOPTS="-g"
-	else
-	    Note "... but not together with the -O option, not using it."
-	    GCOPTS=
-	fi
+
+        GCOPTS="-g"
+#	if $CCOMPILER $ENVOPTS -c -g -O dummy.c >t 2>&1 && CheckForGandO t; then
+#	else
+#	    Note "... but not together with the -O option, not using it."
+#	    GCOPTS=
+#	fi
     else
 	GCOPTS=
     fi
@@ -1115,7 +1116,7 @@ if [ "$DSO" = auto ]; then
 	;;
     *-hpux*yes)
         DSOSUF=sl
-        DSOLD=gcc
+        DSOLD=clang
         DSOOPTS='-fpic -shared'
         LIBCOPTS=-fpic
         DSO=HPUX

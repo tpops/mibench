@@ -186,13 +186,13 @@ showversion:
 .c.o:
 	@. ./config.sh; \
 	  set -x; \
-	  $$CC $$CFLAGS -c $<
+	  clang ${PARAMS}   -c $<
 
 .y.o:
 	@. ./config.sh; \
 	  set -x; \
 	  $$YACC $<; \
-	  $$CC $$CFLAGS -c y.tab.c; \
+	  clang ${PARAMS}   -c y.tab.c; \
 	  mv y.tab.o $@; \
 	  rm -f y.tab.c
 
@@ -392,19 +392,19 @@ language-subdirs:	config.sh
 buildhash: config.sh buildhash.o hash.o makedent.o parse.o
 	@. ./config.sh; \
 	  set -x; \
-	  $$CC $$CFLAGS -o buildhash buildhash.o hash.o makedent.o parse.o \
+	  clang ${PARAMS}   -o buildhash buildhash.o hash.o makedent.o parse.o \
 	    $$LIBES
 
 icombine: config.sh icombine.o makedent.o parse.o
 	. ./config.sh; \
 	  set -x; \
-	  $$CC $$CFLAGS -o icombine icombine.o makedent.o parse.o \
+	  clang ${PARAMS}   -o icombine icombine.o makedent.o parse.o \
 	    $$LIBES
 
 ijoin: config.sh ijoin.o fields.o
 	@. ./config.sh; \
 	  set -x; \
-	  $$CC $$CFLAGS -o ijoin ijoin.o fields.o $$LIBES
+	  clang ${PARAMS}   -o ijoin ijoin.o fields.o $$LIBES
 
 EDITFILE	=	notthere
 OUTFILE		=	/dev/null
@@ -470,19 +470,19 @@ OBJS	=	term.o ispell.o correct.o defmt.o dump.o good.o lookup.o \
 ispell: config.sh $(OBJS)
 	@. ./config.sh; \
 	  set -x; \
-	  $$CC $$CFLAGS -o ispell $(OBJS) $$TERMLIB $$REGLIB $$LIBES
+	  clang ${PARAMS}   -o ispell $(OBJS) $$TERMLIB $$REGLIB $$LIBES
 
 #	Since some makes don't have appropriate built-in rules, here are
 #	dependencies for sq and unsq.  Sigh.
 sq:	config.sh msgs.h sq.c
 	@. ./config.sh; \
 	  set -x; \
-	  $$CC $$CFLAGS -o sq sq.c
+	  clang ${PARAMS}   -o sq sq.c
 
 unsq:	config.sh msgs.h unsq.c
 	@. ./config.sh; \
 	  set -x; \
-	  $$CC $$CFLAGS -o unsq unsq.c
+	  clang ${PARAMS}   -o unsq unsq.c
 
 $(OBJS) buildhash.o icombine.o hash.o parse.o: config.h ispell.h local.h
 $(OBJS) buildhash.o icombine.o hash.o parse.o: proto.h msgs.h

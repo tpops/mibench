@@ -1,4 +1,4 @@
-#    Copyright (C) 1997 Aladdin Enterprises.  All rights reserved.
+#    Copyright (C) 1997 Aladdin Enterprises.  All rights reserved.RAM
 # 
 # This file is part of Aladdin Ghostscript.
 # 
@@ -68,7 +68,7 @@ GS_REVISION=$(GS_VERSION)
 # the directories also define the default search path for the
 # initialization files (gs_*.ps) and the fonts.
 
-INSTALL = /usr/bin/install -c
+INSTALL = ./install -c
 INSTALL_PROGRAM = $(INSTALL) -m 755 
 INSTALL_DATA = $(INSTALL) -m 644 
 
@@ -202,7 +202,7 @@ GCFLAGS=-Dconst= -Wall -Wpointer-arith -Wstrict-prototypes
 #   gcc to accept ANSI-style function prototypes and function definitions.
 #XCFLAGS=
 
-CFLAGS=-O1 $(GCFLAGS) $(XCFLAGS)
+#CFLAGS=-O1 $(GCFLAGS) $(XCFLAGS)
 
 # Define platform flags for ld.
 # SunOS 4.n may need -Bstatic.

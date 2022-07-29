@@ -40,16 +40,7 @@
 #
 # use anything else and feel the pain ;)
 
-use Class::Struct;
 
-struct Func =>
-{
-    name => '$',
-    full_name => '$',
-    astack =>'$',
-    stack => '$',
-    calls => '@'
-};
 
 my (@stack, $re, $dre, $x, $xsi,$calls, @astack);
 {
@@ -147,7 +138,6 @@ my %ambiguous;      # "func" -> 1
 my $funcre = qr/^($x*) <(.*)>:$/;
 my $func;
 my $file, $lastslash;
-my $currFunc = null;
 while (my $line = <STDIN>) {
 	if ($line =~ m/$funcre/) {
 		$a = $1; #Address of function
@@ -196,8 +186,11 @@ while (my $line = <STDIN>) {
 	elsif (defined $calls && $line =~ m/$calls/){
 		my $address= $1;
                 my $name = $2;
+                 
+                $address=~ s/^0*//; #remove trailing 0s
                 my $t = "$address\@$file";
                 $call_graph{$source}->{$t} = 1;
+
     	}
 	elsif (defined $dre && $line =~ m/$dre/) {
 		my $size = "Dynamic ($1)";
@@ -225,12 +218,12 @@ while (my $line = <STDIN>) {
 
 my %unresolved;
 
-foreach (keys %call_graph) {
+foreach (sort keys %call_graph) {
     my $from = $_;
     my $callees = $call_graph{$from};
     my %resolved;
 
-    foreach (keys %$callees) {
+    foreach (sort keys %$callees) {
 	my $t = $_;
 
 	if (defined($addresses{$t})) {
@@ -283,7 +276,7 @@ sub trace {
 
     my $targets = $call_graph{$f} || die "Unknown function: $f";
     if (defined($targets)) {
-	foreach (keys %$targets) {
+	foreach (sort keys %$targets) {
 	    my $t = $_;
 
 	    $has_caller{$t} = 1;
@@ -302,18 +295,19 @@ sub trace {
     $visited{$f} = " " if $visited{$f} eq "?";
 }
 
-foreach (keys %call_graph) { trace $_; }
+foreach (sort keys %call_graph) { trace ($_); }
 
 # Now, print results in a nice table.
-printf "  %-30s %8s %8s %8s\n",
-    "Func", "Cost", "Frame", "Height";
-print "------------------------------------";
-print "------------------------------------\n";
+#printf "  %-30s %8s %8s %8s\n",
+#    "Func", "Cost", "Frame", "Height";
+#print "------------------------------------";
+#print "------------------------------------\n";
 
 my $max_iv = 0;
 my $main = 0;
 
-foreach (sort { $total_cost{$b} <=> $total_cost{$a} } keys %visited) {
+ foreach (sort { $total_cost{$b} <=> $total_cost{$a} } keys %visited) {
+#foreach (sort  keys %visited) {
     my $name = $_;
 
     if (/^(.*)@(.*)$/) {
@@ -333,9 +327,28 @@ foreach (sort { $total_cost{$b} <=> $total_cost{$a} } keys %visited) {
     }
 
     if ($ambiguous{$name}) { $name = $_; }
+    
+    printf "Function: %s %s: \n\tastack:%d\n\tstack:%d\n\tdepth:%d\n\tcalls:\n",
+	$tag,$name,$cost,$frame_size{$_} || 0,$call_depth{$_};
+    my $targets = $call_graph{$_};
+    if (defined($targets)) {
+        my $maxOverlap = 0;
+        foreach (sort{$total_cost{$b} <=> $total_cost{$a}}  keys %$targets) {
+	   my $t = $_;
+           if ($maxOverlap < $frame_size{$_}){
+              $maxOverlap = $frame_size{$_};
+           }else {
+              printf "\t\t possible overlap: frame:%d overlap:%d\n",
+                     $frame_size{$_}, $maxOverlap;
+           }
+           printf "\t\t%s astack:%d stack:%d depth:%d\n",
+		$t, $total_cost{$t},$frame_size{$_} || 0,$call_depth{$_};;
+	}
+    }
 
-    printf "%s %-30s %8d %8d %8d\n", $tag, $name, $cost,
-	$frame_size{$_} || 0, $call_depth{$_};
+
+    #printf "%s %-30s %8d %8d %8d\n", $tag, $name, $cost,
+#	$frame_size{$_} || 0, $call_depth{$_};
 }
 
 print "\n";
@@ -347,6 +360,8 @@ printf "  main = %d, worst IV = %d, total = %d\n",
       $total_cost{$global_name{"main"}} + $total_cost{"INTERRUPT"};
 
 print "\n";
+
+
 
 print "The following functions were not resolved:\n";
 foreach (keys %unresolved) { print "  $_\n"; }

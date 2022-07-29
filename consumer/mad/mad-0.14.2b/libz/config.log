@@ -11,9 +11,13 @@ configure:773: checking for working autoheader
 configure:786: checking for working makeinfo
 configure:808: checking host system type
 configure:833: checking for gcc
-configure:946: checking whether the C compiler (gcc  ) works
-configure:962: gcc -o conftest    conftest.c  1>&5
-configure:988: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:946: checking whether the C compiler (clang  ) works
+configure:962: clang -o conftest    conftest.c  1>&5
+configure:959:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+main(){return(0);}
+^
+1 warning generated.
+configure:988: checking whether the C compiler (clang  ) is a cross-compiler
 configure:993: checking whether we are using GNU C
-configure:1021: checking whether gcc accepts -g
+configure:1021: checking whether clang accepts -g
 configure:1055: checking for ranlib
